@@ -3,9 +3,20 @@
 }
 
 <div class="jumbotron">
-    <h1>Quản lý tài khoản</h1>
+    <h2>Quản lý tài khoản</h2>
 </div>
 
+
+
+
 <div class="row">
-    
+    <button type="button" class="btn btn-primary" id="createEmployeeBtn">Tạo tài khoản</button>
 </div>
+
+@section Scripts {
+    <script>
+        $("#createEmployeeBtn").click(function () {
+            window.location.href="@Url.Action("CreateEmployee", "Employee")";
+        });
+    </script>
+}

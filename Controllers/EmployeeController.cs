@@ -16,5 +16,16 @@ namespace TimeKeepingYaz.Controllers
             var emp = _timeKeepingContext.Statuses.ToList();
             return View();
         }
+
+        [HttpGet]
+        public ActionResult CreateEmployee(int? employeeId)
+        {
+            var emp = _timeKeepingContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+
+            if (emp == null)
+                emp = new Employee();
+
+            return View("EmployeeDetail", emp);
+        }
     }
 }

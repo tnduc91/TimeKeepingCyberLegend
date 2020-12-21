@@ -1,0 +1,20 @@
+﻿@model TimeKeepingYaz.Employee
+
+@{
+    var pageName = Model == null ? "Tạo mới nhân viên" : "Chỉnh sửa thông tin nhân viên";
+}
+
+<div class="jumbotron">
+    <h2>@pageName</h2>
+</div>
+
+<div class="row">
+    <label>Tên nhân viên</label>
+    <input class="form-control" id="exampleInputEmail1" value="@Model.Name">
+</div>
+
+
+@section Scripts {
+    <script>
+    </script>
+}
