@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DailyCheckin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="WorkingHours" Type="int" Nullable="false" />
+    <Property Name="Note" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="StatusId" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__DailyCheckin__0000000000000027">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="DailyCheckin" Type="Self.DailyCheckin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DailyCheckin">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="statusId_foreignKey">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="DailyCheckin" Type="Self.DailyCheckin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DailyCheckin">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="DailyCheckin" EntityType="Self.DailyCheckin" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" store:Type="Tables" />
+    <AssociationSet Name="FK__DailyCheckin__0000000000000027" Association="Self.FK__DailyCheckin__0000000000000027">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="DailyCheckin" EntitySet="DailyCheckin" />
+    </AssociationSet>
+    <AssociationSet Name="statusId_foreignKey" Association="Self.statusId_foreignKey">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="DailyCheckin" EntitySet="DailyCheckin" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
