@@ -13,10 +13,10 @@ namespace TimeKeepingYaz
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TimeKeepingConnectionString2 : DbContext
+    public partial class Entities1 : DbContext
     {
-        public TimeKeepingConnectionString2()
-            : base("name=TimeKeepingConnectionString2")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
     

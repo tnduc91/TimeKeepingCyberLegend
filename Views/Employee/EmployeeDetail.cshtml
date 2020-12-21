@@ -1,17 +1,26 @@
 ﻿@model TimeKeepingYaz.Employee
 
 @{
-    var pageName = Model == null ? "Tạo mới nhân viên" : "Chỉnh sửa thông tin nhân viên";
+    var pageName = Model.Id == 0 ? "Tạo mới nhân viên" : "Chỉnh sửa thông tin nhân viên";
+    var submitText = Model.Id == 0 ? "Tạo mới" : "Lưu thay đổi";
 }
 
 <div class="jumbotron">
     <h2>@pageName</h2>
 </div>
 
-<div class="row">
+<form method="post" action="@Url.Action("CreateOrUpdateEmployee")">
     <label>Tên nhân viên</label>
-    <input class="form-control" id="exampleInputEmail1" value="@Model.Name">
-</div>
+    <input class="form-control" name="Name" value="@Model.Name">
+    <br />
+    <label>Số điện thoại</label>
+    <input class="form-control" name="PhoneNo" value="@Model.PhoneNo">
+    <br />
+    <label>Mật khẩu</label>
+    <input class="form-control" name="Password" value="@Model.Password">
+    <br/>
+    <input type="submit" value="@submitText" class="btn btn-primary">
+</form>
 
 
 @section Scripts {

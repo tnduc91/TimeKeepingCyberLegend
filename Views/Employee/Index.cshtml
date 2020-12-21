@@ -1,22 +1,54 @@
-﻿@{
+﻿@using System.Collections.Generic;
+
+@model List<TimeKeepingYaz.Employee>
+
+@{
     ViewBag.Title = "Tai khoan";
+    var grid = "col-md-4 col-sm-4 col-xs-4 ";
 }
 
 <div class="jumbotron">
-    <h2>Quản lý tài khoản</h2>
+    <h2>Danh sách nhân viên</h2>
 </div>
-
-
 
 
 <div class="row">
     <button type="button" class="btn btn-primary" id="createEmployeeBtn">Tạo tài khoản</button>
 </div>
 
+<div class="container">
+    @foreach (var e in Model)
+    {
+
+        <div class="row">
+            <div class="@grid">@e.Name</div>
+            <div class="@grid">@e.PhoneNo</div>
+            <div class="@grid">
+                <button type="button" class="btn btn-danger delete-btn" value="@e.Id">Xóa</button>
+            </div>
+        </div>
+    }
+
+</div>
+
 @section Scripts {
     <script>
         $("#createEmployeeBtn").click(function () {
-            window.location.href="@Url.Action("CreateEmployee", "Employee")";
+            window.location.href="@Url.Action("CreateOrUpdateEmployee", "Employee")";
+        });
+
+        $(".delete-btn").click(function () {
+            debugger;
+            var empId = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Employee/DeleteEmployee',
+                data: { employeeId : empId},
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
         });
     </script>
 }

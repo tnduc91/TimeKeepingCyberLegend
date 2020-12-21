@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c91576721cb0468ab5046770a853c8e8" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model.DailyCheckin" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="0.75" PointY="5.5" />
-        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="0.75" PointY="1.5" />
-        <AssociationConnector Association="Model.FK__DailyCheckin__0000000000000027" />
-        <AssociationConnector Association="Model.statusId_foreignKey" />
+      <Diagram DiagramId="a72b91ff2cd44b4ca36ddd29c4e891f8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.DailyCheckin" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__DailyCheckin__0000000000000027" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.statusId_foreignKey" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

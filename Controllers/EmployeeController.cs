@@ -13,12 +13,15 @@ namespace TimeKeepingYaz.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            var emp = _timeKeepingContext.Statuses.ToList();
-            return View();
+            var emp = _timeKeepingContext
+                .Employees
+                .Where(x => x.IsActive == true)
+                .ToList();
+            return View(emp);
         }
 
         [HttpGet]
-        public ActionResult CreateEmployee(int? employeeId)
+        public ActionResult CreateOrUpdateEmployee(int? employeeId)
         {
             var emp = _timeKeepingContext.Employees.FirstOrDefault(x => x.Id == employeeId);
 
@@ -27,5 +30,29 @@ namespace TimeKeepingYaz.Controllers
 
             return View("EmployeeDetail", emp);
         }
+
+        [HttpPost]
+        public ActionResult CreateOrUpdateEmployee(Employee emp)
+        {
+            if (emp.Id == 0) // Create new
+            {
+                emp.IsActive = true;
+                _timeKeepingContext.Employees.Add(emp);
+            }
+
+            _timeKeepingContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEmployee(int employeeId)
+        {
+            var emp = _timeKeepingContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+            emp.IsActive = false;
+            _timeKeepingContext.SaveChanges();
+
+            return Content("Done");
+        }   
     }
 }
