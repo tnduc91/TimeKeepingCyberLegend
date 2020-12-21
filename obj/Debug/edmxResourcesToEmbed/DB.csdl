@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TimeKeepingConnectionString2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DailyCheckins" EntityType="Model.DailyCheckin" />
+    <EntitySet Name="Employees" EntityType="Model.Employee" />
+    <EntitySet Name="Status" EntityType="Model.Status" />
+    <AssociationSet Name="FK__DailyCheckin__0000000000000027" Association="Model.FK__DailyCheckin__0000000000000027">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="DailyCheckin" EntitySet="DailyCheckins" />
+    </AssociationSet>
+    <AssociationSet Name="statusId_foreignKey" Association="Model.statusId_foreignKey">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="DailyCheckin" EntitySet="DailyCheckins" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="DailyCheckin">
     <Key>
       <PropertyRef Name="Id" />
@@ -9,9 +22,9 @@
     <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="WorkingHours" Type="Int32" Nullable="false" />
-    <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK__DailyCheckin__0000000000000027" FromRole="DailyCheckin" ToRole="Employee" />
+    <Property Name="Note" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="StatusId" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Model.FK__DailyCheckin__0000000000000027" FromRole="DailyCheckin" ToRole="Employee" />
     <NavigationProperty Name="Status" Relationship="Model.statusId_foreignKey" FromRole="DailyCheckin" ToRole="Status" />
   </EntityType>
   <EntityType Name="Employee">
@@ -19,22 +32,20 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="StatusCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DailyCheckins" Relationship="Self.FK__DailyCheckin__0000000000000027" FromRole="Employee" ToRole="DailyCheckin" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DailyCheckins" Relationship="Model.FK__DailyCheckin__0000000000000027" FromRole="Employee" ToRole="DailyCheckin" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DailyCheckins" Relationship="Model.statusId_foreignKey" FromRole="Status" ToRole="DailyCheckin" />
   </EntityType>
   <Association Name="FK__DailyCheckin__0000000000000027">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="DailyCheckin" Type="Self.DailyCheckin" Multiplicity="*" />
+    <End Type="Model.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="Model.DailyCheckin" Role="DailyCheckin" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="Id" />
@@ -44,19 +55,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="DailyCheckins" EntityType="Self.DailyCheckin" />
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
-    <EntitySet Name="Status" EntityType="Self.Status" />
-    <AssociationSet Name="FK__DailyCheckin__0000000000000027" Association="Self.FK__DailyCheckin__0000000000000027">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="DailyCheckin" EntitySet="DailyCheckins" />
-    </AssociationSet>
-    <AssociationSet Name="statusId_foreignKey" Association="Model.statusId_foreignKey">
-      <End Role="Status" EntitySet="Status" />
-      <End Role="DailyCheckin" EntitySet="DailyCheckins" />
-    </AssociationSet>
-  </EntityContainer>
   <Association Name="statusId_foreignKey">
     <End Type="Model.Status" Role="Status" Multiplicity="0..1" />
     <End Type="Model.DailyCheckin" Role="DailyCheckin" Multiplicity="*" />
