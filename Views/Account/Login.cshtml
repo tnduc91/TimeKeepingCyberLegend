@@ -1,0 +1,24 @@
+﻿@using TimeKeepingYaz.Models
+@model TimeKeepingYaz.Employee
+
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đăng nhập</h2>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <label>Tài khoản (số điện thoại)</label>
+    <input class="form-control" name="PhoneNo" value="@Model.PhoneNo">
+    <br />
+    <label>Mật khẩu</label>
+    <input class="form-control" name="Password" value="@Model.Password">
+
+    <br/>
+    <button type="submit" value="" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-send"></span>
+        Đăng nhập
+    </button>
+}
