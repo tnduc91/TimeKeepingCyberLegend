@@ -22,9 +22,13 @@
                         </div>
                     </td>
                     <td>
-                        @if (Session["UserName"] != null)
+                        @if (Session["UserName"] != null && Session["UserName"] != "")
                         {
-                            <span style="float:right; vertical-align:middle;color:white">Xin chào @Session["UserName"]</span>
+                        <span style="float:right; vertical-align:middle;color:white">
+                            Xin chào &nbsp;@Session["UserName"] &nbsp;&nbsp;&nbsp;&nbsp;
+                            @Html.ActionLink("Đăng xuất", "LogOff", "Account")
+                        </span>
+                            
                         }
                         else
                         {

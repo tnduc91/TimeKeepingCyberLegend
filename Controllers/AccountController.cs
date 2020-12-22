@@ -44,8 +44,7 @@ namespace TimeKeepingYaz.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public ActionResult LogOff()
         {
             Session["UserName"] = string.Empty;
