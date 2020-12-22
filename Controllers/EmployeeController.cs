@@ -39,6 +39,13 @@ namespace TimeKeepingYaz.Controllers
                 emp.IsActive = true;
                 _timeKeepingContext.Employees.Add(emp);
             }
+            else
+            {
+                var record = _timeKeepingContext.Employees.Find(emp.Id);
+                record.Name = emp.Name;
+                record.PhoneNo = emp.PhoneNo;
+                record.Password = emp.Password;
+            }
 
             _timeKeepingContext.SaveChanges();
 

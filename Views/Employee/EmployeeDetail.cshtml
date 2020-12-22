@@ -10,6 +10,7 @@
 </div>
 
 <form method="post" action="@Url.Action("CreateOrUpdateEmployee")">
+    <input style="display:none" form-control" name="Id" value="@Model.Id">
     <label>Tên nhân viên</label>
     <input class="form-control" name="Name" value="@Model.Name">
     <br />
@@ -18,8 +19,12 @@
     <br />
     <label>Mật khẩu</label>
     <input class="form-control" name="Password" value="@Model.Password">
-    <br/>
-    <input type="submit" value="@submitText" class="btn btn-primary">
+    <br />
+
+    <button type="submit" value="" class="btn btn-primary">
+        <span class="glyphicon glyphicon-check"></span>
+        @submitText
+    </button>
 </form>
 
 

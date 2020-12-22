@@ -4,7 +4,6 @@
 
 @{
     ViewBag.Title = "Tai khoan";
-    var grid = "col-md-4 col-sm-4 col-xs-4 ";
 }
 
 <div class="jumbotron">
@@ -12,23 +11,42 @@
 </div>
 
 
-<div class="row">
-    <button type="button" class="btn btn-primary" id="createEmployeeBtn">Tạo tài khoản</button>
-</div>
 
-<div class="container">
-    @foreach (var e in Model)
-    {
 
-        <div class="row">
-            <div class="@grid">@e.Name</div>
-            <div class="@grid">@e.PhoneNo</div>
-            <div class="@grid">
-                <button type="button" class="btn btn-danger delete-btn" value="@e.Id">Xóa</button>
-            </div>
-        </div>
-    }
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Số điện thoại</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
 
+            <tr>
+                <td>@e.Name</td>
+                <td>@e.Name</td>
+                <td>
+                    <button type="button" class="btn btn-primary update-btn btn-sm" style="margin-right:3px" value="@e.Id">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        Chỉnh sửa</button>
+                    <button type="button" class="btn btn-danger delete-btn btn-sm" value="@e.Id">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Xóa</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="row" style="margin-top:10px; margin-left:10px">
+    <button type="button" class="btn btn-primary btn-sm" id="createEmployeeBtn">
+        <span class="glyphicon glyphicon-plus"></span>
+        Tạo tài khoản
+    </button>
 </div>
 
 @section Scripts {
@@ -49,6 +67,13 @@
                     window.location.reload();
                 }
             });
+        });
+
+        $(".update-btn").click(function () {
+            debugger;
+            var employeeId = $(this).val();
+            window.location.href = "@Url.Action("CreateOrUpdateEmployee", "Employee")" + "?employeeId=" + employeeId;
+
         });
     </script>
 }
