@@ -1,0 +1,88 @@
+﻿@using System.Collections.Generic;
+@using TimeKeepingYaz;
+@using TimeKeepingYaz.StaticData;
+@using TimeKeepingYaz.Models;
+@model CheckinsViewModel
+
+@{
+    ViewBag.Title = "Chấm công";
+}
+
+<div class="" style="color: forestgreen">
+    <h2 class="display-4">Chấm công tháng @Model.Month năm @Model.Year</h2>
+    <h2>@Model.UserName</h2>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ngày</th>
+            <th style="width:10%">Giờ làm</th>
+            <th style="width:70%">Chi chú</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dc in Model.Checkins)
+        {
+
+            <tr>
+                <td>Ngày @dc.Date.Value.Day Tháng @dc.Date.Value.Month</td>
+                <td><input class="form-control" name="WorkingHours" value="@dc.WorkingHours"></td>
+                <td><input class="form-control" name="Note" value="@dc.Note"></td>
+                <td>
+                    @if (dc.StatusId == (int)StatusEnum.Init)
+                    {
+                        <span class="badge badge-secondary"></span>
+                    }
+                    else if (dc.StatusId == (int)StatusEnum.CreatedByEmployee)
+                    {
+                        <span class="badge badge-info">Nhân viên nhập</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-success">Admin xác nhận</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="row" style="margin-top:10px; margin-left:10px">
+    <button type="button" class="btn btn-primary btn-sm" id="createEmployeeBtn">
+        <span class="glyphicon glyphicon-save"></span>
+        Lưu
+    </button>
+</div>
+
+@section Scripts {
+    <script>
+        $("#createEmployeeBtn").click(function () {
+            window.location.href="@Url.Action("CreateOrUpdateEmployee", "Employee")";
+        });
+
+        $(".delete-btn").click(function () {
+            debugger;
+            var empId = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Employee/DeleteEmployee',
+                data: { employeeId : empId},
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+
+        $(".update-btn").click(function () {
+            debugger;
+            var employeeId = $(this).val();
+            window.location.href = "@Url.Action("CreateOrUpdateEmployee", "Employee")" + "?employeeId=" + employeeId;
+
+        });
+    </script>
+}

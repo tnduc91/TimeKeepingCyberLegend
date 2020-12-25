@@ -29,6 +29,7 @@ namespace TimeKeepingYaz.Controllers
                     if (user != null)
                     {
                         Session["UserName"] = user.Name;
+                        Session["UserId"] = user.Id;
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -48,6 +49,7 @@ namespace TimeKeepingYaz.Controllers
         public ActionResult LogOff()
         {
             Session["UserName"] = string.Empty;
+            Session["UserId"] = string.Empty;
             return RedirectToAction("Login", "Account");
         }
     }

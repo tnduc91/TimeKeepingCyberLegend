@@ -5,12 +5,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StartTime" Type="datetime" Nullable="false" />
-    <Property Name="EndTime" Type="datetime" Nullable="false" />
     <Property Name="EmployeeId" Type="int" Nullable="false" />
     <Property Name="WorkingHours" Type="int" Nullable="false" />
-    <Property Name="Note" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Note" Type="nvarchar" MaxLength="300" />
     <Property Name="StatusId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>

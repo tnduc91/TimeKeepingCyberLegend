@@ -10,12 +10,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartTime" Type="datetime" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="WorkingHours" Type="int" Nullable="false" />
-          <Property Name="Note" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="300" />
           <Property Name="StatusId" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -81,12 +81,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="WorkingHours" Type="Int32" Nullable="false" />
-          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="StatusId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__DailyCheckin__0000000000000027" FromRole="DailyCheckin" ToRole="Employee" />
           <NavigationProperty Name="Status" Relationship="Self.statusId_foreignKey" FromRole="DailyCheckin" ToRole="Status" />
         </EntityType>
@@ -133,7 +133,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DailyCheckins" EntityType="Self.DailyCheckin" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Status" EntityType="Self.Status" />
@@ -151,17 +151,17 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="DailyCheckins">
             <EntityTypeMapping TypeName="Model.DailyCheckin">
               <MappingFragment StoreEntitySet="DailyCheckin">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

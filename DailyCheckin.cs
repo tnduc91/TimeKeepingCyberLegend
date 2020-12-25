@@ -15,12 +15,12 @@ namespace TimeKeepingYaz
     public partial class DailyCheckin
     {
         public int Id { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
         public int EmployeeId { get; set; }
         public int WorkingHours { get; set; }
         public string Note { get; set; }
         public Nullable<int> StatusId { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Status Status { get; set; }
