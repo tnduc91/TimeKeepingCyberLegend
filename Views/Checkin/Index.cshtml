@@ -29,7 +29,15 @@
 
             <tr>
                 <td>Ngày @dc.Date.Value.Day Tháng @dc.Date.Value.Month</td>
-                <td><input class="form-control" name="WorkingHours" value="@dc.WorkingHours"></td>
+                <td>
+                    <a href="#"
+                       class="working-hours"
+                       data-pk="@dc.Id"
+                       data-value="@dc.WorkingHours"
+                       data-url="@Url.Action("UpdateWorkingHours", "Checkin")">
+                        @dc.WorkingHours
+                    </a>
+                </td>
                 <td><input class="form-control" name="Note" value="@dc.Note"></td>
                 <td>
                     @if (dc.StatusId == (int)StatusEnum.Init)
@@ -51,38 +59,16 @@
 </table>
 
 
-<div class="row" style="margin-top:10px; margin-left:10px">
-    <button type="button" class="btn btn-primary btn-sm" id="createEmployeeBtn">
-        <span class="glyphicon glyphicon-save"></span>
-        Lưu
-    </button>
-</div>
-
 @section Scripts {
     <script>
-        $("#createEmployeeBtn").click(function () {
-            window.location.href="@Url.Action("CreateOrUpdateEmployee", "Employee")";
-        });
-
-        $(".delete-btn").click(function () {
+        $(document).ready(function () {
             debugger;
-            var empId = $(this).val();
-
-            $.ajax({
-                type: 'POST',
-                url: '/Employee/DeleteEmployee',
-                data: { employeeId : empId},
-                success: function (response) {
-                    window.location.reload();
-                }
+            $('.working-hours').editable({
+                url: $(this).data("url"),
+                type: 'number',
+                pk: $(this).data("pk"),
+                workingHours: $(this).data("value")
             });
-        });
-
-        $(".update-btn").click(function () {
-            debugger;
-            var employeeId = $(this).val();
-            window.location.href = "@Url.Action("CreateOrUpdateEmployee", "Employee")" + "?employeeId=" + employeeId;
-
         });
     </script>
 }

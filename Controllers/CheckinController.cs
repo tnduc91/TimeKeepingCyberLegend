@@ -62,5 +62,20 @@ namespace TimeKeepingYaz.Controllers
             checkinsViewModel.Checkins.AddRange(records);
             return View(checkinsViewModel);
         }
+
+        [HttpPost]
+        public ActionResult UpdateWorkingHours(int pk, int value)
+        {            
+            var checkinRecord = _db.DailyCheckins.Find(pk);
+            if (checkinRecord == null)
+            {
+                return Content("No record found");
+            }
+
+            checkinRecord.WorkingHours = value;
+            _db.SaveChanges();
+
+            return Content("OK");
+        }
     }
 }
