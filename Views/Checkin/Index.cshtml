@@ -18,9 +18,10 @@
     <thead>
         <tr>
             <th>Ngày</th>
-            <th style="width:10%">Giờ làm</th>
-            <th style="width:70%">Chi chú</th>
+            <th>Giờ làm</th>
+            <th>Chi chú</th>
             <th>Trạng thái</th>
+            <th>Thời gian nhập liệu</th>
         </tr>
     </thead>
     <tbody>
@@ -29,16 +30,35 @@
 
             <tr>
                 <td>Ngày @dc.Date.Value.Day Tháng @dc.Date.Value.Month</td>
-                <td>
-                    <a href="#"
-                       class="working-hours"
-                       data-pk="@dc.Id"
-                       data-value="@dc.WorkingHours"
-                       data-url="@Url.Action("UpdateWorkingHours", "Checkin")">
-                        @dc.WorkingHours
-                    </a>
-                </td>
-                <td><input class="form-control" name="Note" value="@dc.Note"></td>
+                @if (dc.StatusId == (int)StatusEnum.ApprovedByAdmin)
+                {
+                    <td>@dc.WorkingHours</td>
+                    <td>@dc.Note</td>
+                }
+                else
+                {
+                    <td>
+                        <a href="#"
+                           class="update"
+                           data-pk="@dc.Id"
+                           data-value="@dc.WorkingHours"
+                           data-type="number"
+                           data-url="@Url.Action("UpdateWorkingHours", "Checkin")">
+                            @dc.WorkingHours
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#"
+                           class="update"
+                           data-pk="@dc.Id"
+                           data-value="@dc.Note"
+                           data-type="text"
+                           data-url="@Url.Action("UpdateNote", "Checkin")">
+                            @dc.Note
+                        </a>
+                    </td>
+                }
+
                 <td>
                     @if (dc.StatusId == (int)StatusEnum.Init)
                     {
@@ -53,6 +73,7 @@
                         <span class="badge badge-success">Admin xác nhận</span>
                     }
                 </td>
+                <td>@dc.ModifiedDate</td>
             </tr>
         }
     </tbody>
@@ -62,12 +83,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            debugger;
-            $('.working-hours').editable({
-                url: $(this).data("url"),
-                type: 'number',
-                pk: $(this).data("pk"),
-                workingHours: $(this).data("value")
+            $('.update').editable({
             });
         });
     </script>

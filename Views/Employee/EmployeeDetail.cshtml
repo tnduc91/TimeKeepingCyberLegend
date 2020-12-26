@@ -21,6 +21,12 @@
     <input class="form-control" name="Password" value="@Model.Password">
     <br />
 
+    <span>@Html.CheckBoxFor(x => x.IsAdmin) &nbsp; Admin</span>
+
+
+
+    <br />
+    <br />
     <button type="submit" value="" class="btn btn-primary btn-sm">
         <span class="glyphicon glyphicon-check"></span>
         @submitText
@@ -32,3 +38,4 @@
     <script>
     </script>
 }
+

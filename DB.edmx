@@ -26,6 +26,7 @@
           <Property Name="PhoneNo" Type="nvarchar" MaxLength="11" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -99,6 +100,7 @@
           <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DailyCheckins" Relationship="Self.FK__DailyCheckin__0000000000000027" FromRole="Employee" ToRole="DailyCheckin" />
         </EntityType>
         <EntityType Name="Status">
@@ -173,6 +175,7 @@
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

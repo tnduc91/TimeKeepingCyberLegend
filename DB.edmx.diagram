@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0855ec3fbd674e8ea7a19da9cd95d184" Name="Diagram1">
+      <Diagram DiagramId="9d1232e6ab8a4c45bb31d9bd1f7c7b8d" Name="Diagram1">
         <EntityTypeShape EntityType="Model.DailyCheckin" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__DailyCheckin__0000000000000027" ManuallyRouted="false" />
         <AssociationConnector Association="Model.statusId_foreignKey" ManuallyRouted="false" />

@@ -50,6 +50,7 @@ namespace TimeKeepingYaz.Controllers
                     checkin.EmployeeId = employee.Id;
                     checkin.StatusId = (int) StatusEnum.Init;
                     checkin.WorkingHours = 0;
+                    checkin.Note = "";
                     checkin.ModifiedDate = DateTime.Now;
 
                     checkins.Add(checkin);
@@ -73,6 +74,25 @@ namespace TimeKeepingYaz.Controllers
             }
 
             checkinRecord.WorkingHours = value;
+            checkinRecord.StatusId = (int) StatusEnum.CreatedByEmployee;
+            checkinRecord.ModifiedDate = DateTime.Now;
+            _db.SaveChanges();
+
+            return Content("OK");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateNote(int pk, string value)
+        {
+            var checkinRecord = _db.DailyCheckins.Find(pk);
+            if (checkinRecord == null)
+            {
+                return Content("No record found");
+            }
+
+            checkinRecord.Note = value;
+            checkinRecord.StatusId = (int)StatusEnum.CreatedByEmployee;
+            checkinRecord.ModifiedDate = DateTime.Now;
             _db.SaveChanges();
 
             return Content("OK");

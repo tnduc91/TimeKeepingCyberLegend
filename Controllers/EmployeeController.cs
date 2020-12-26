@@ -46,6 +46,7 @@ namespace TimeKeepingYaz.Controllers
                 record.Name = emp.Name;
                 record.PhoneNo = emp.PhoneNo;
                 record.Password = emp.Password;
+                record.IsAdmin = emp.IsAdmin;
             }
 
             _timeKeepingContext.SaveChanges();

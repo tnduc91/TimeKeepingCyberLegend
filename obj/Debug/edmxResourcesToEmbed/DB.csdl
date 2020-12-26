@@ -23,6 +23,7 @@
     <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="DailyCheckins" Relationship="Self.FK__DailyCheckin__0000000000000027" FromRole="Employee" ToRole="DailyCheckin" />
   </EntityType>
   <EntityType Name="Status">

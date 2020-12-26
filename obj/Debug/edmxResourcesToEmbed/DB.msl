@@ -22,6 +22,7 @@
           <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
